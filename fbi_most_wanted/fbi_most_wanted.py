@@ -19,7 +19,7 @@ class State(rx.State):
             self.people.append(new_person)
         print(self.people)
             
-def card():
+def card(info):
     return rx.center(
         rx.card(
             rx.vstack(
@@ -53,12 +53,12 @@ def card():
                 rx.vstack(
                     
                     rx.text(
-                        "EFRAIN VASQUEZ-YANEZ",
+                        info["name"],
                         font_size="24px",
                           
                     ),
                     rx.text(
-                        "The FBI is offering a reward of up to $20,000 for information leading to the arrest of Efrain Vasquez-Yanez",
+                        info["description"],
                         font_size="16px",
                         font_weight="bolder",
                         line_height="22.4px",
@@ -89,8 +89,10 @@ def card():
         ),
         margin_right="78px",
         margin_left="78px",
-        height="100%"
-    ),
+        height="100%",
+        margin_top="16px",
+        margin_bottom="16px"
+    )
 @rx.page(on_load=State.get_people)
 def index() -> rx.Component:
     return rx.vstack(
@@ -104,14 +106,14 @@ def index() -> rx.Component:
             width="100vw",
             height="187px"
         ),
-        rx.hstack(
-            card(),
-            card(),
-            card(),
-            
-            spacing="0",
+        rx.grid(
+            rx.foreach(
+                State.people,
+                card
+            ),
+            margin_top="8px",
+            columns="3",
             width="100vw",
-            height="890px",
             padding_right="78px",
             padding_left="78px"
         )
