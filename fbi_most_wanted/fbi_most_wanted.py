@@ -1,14 +1,24 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
-
 import reflex as rx
+import requests
 
 from rxconfig import config
 
 
 class State(rx.State):
-    """The app state."""
-
-    ...
+    people:list[dict[str,str]] = []
+    def get_people(self):
+        response = requests.get("https://api.fbi.gov/wanted/v1/list")
+        data = response.json()["items"]
+        for person in data:
+            new_person = {}
+            new_person["name"] = person["title"]
+            new_person["img"] = person["images"][0]["large"]
+            new_person["dsc"] = person["caution"]
+            new_person["race"] = person["race"]
+            new_person["description"] = person["description"]
+            self.people.append(new_person)
+        print(self.people)
+            
 def card():
     return rx.center(
         rx.card(
@@ -22,7 +32,18 @@ def card():
                     rx.image(
                         src="https://cloud-l3qxq1qyh-hack-club-bot.vercel.app/0male_1.png",
                         width="21px",
-                        height="21px"
+                        height="21px",
+                        margin_right="11px"
+                    ),
+                    rx.text(
+                        "5'7",
+                        font_size="24px",
+                        margin_right="11px"
+                    ),
+                    rx.text(
+                        "White",
+                        font_size="24px",
+                        margin_right="11px"
                     ),
                     width="100%",
                     height="26px",
@@ -70,9 +91,8 @@ def card():
         margin_left="78px",
         height="100%"
     ),
-
+@rx.page(on_load=State.get_people)
 def index() -> rx.Component:
-    # Welcome Page (Index)
     return rx.vstack(
         rx.box(
             rx.image(
