@@ -13,7 +13,6 @@ class State(rx.State):
                 "page":page
             }          
         )
-        print(response.text)
         data = response.json()["items"]
         for person in data:
             new_person = {}
@@ -25,16 +24,18 @@ class State(rx.State):
             if person["race"]:
                 new_person["race"] = person["race"].title()
             new_person["description"] = person["description"]
-            if person["height_min"]:
-                try:
-                    person["height_min"] = str(person["height_min"])
-                    new_person["height"] = person["height_min"][0] + "'" + person["height_min"][2]
-                except:pass 
+            # if person["height_min"]:
+            #     try:
+            #         person["height_min"] = str(person["height_min"])
+            #         new_person["height"] = person["height_min"][0] + "'" + person["height_min"][2]
+            #     except:pass 
             if new_person["dsc"]:
+                print("yes")
                 return new_person
     for i in range(5):
         persons:dict = get_people(i)
         if persons:
+            print("DOUBLE YES")
             people.append(persons)
 def card(info):
     return rx.center(
