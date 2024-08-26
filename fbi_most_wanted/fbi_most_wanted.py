@@ -26,51 +26,34 @@ def card(info):
                 rx.image(
                     height="420px",
                     object_fit="cover",
-                    src="https://cloud-j01975nem-hack-club-bot.vercel.app/0theguy.png"
-                ),
-                rx.hstack(
-                    rx.image(
-                        src="https://cloud-l3qxq1qyh-hack-club-bot.vercel.app/0male_1.png",
-                        width="21px",
-                        height="21px",
-                        margin_right="11px"
-                    ),
-                    rx.text(
-                        "5'7",
-                        font_size="24px",
-                        margin_right="11px"
-                    ),
-                    rx.text(
-                        "White",
-                        font_size="24px",
-                        margin_right="11px"
-                    ),
-                    width="100%",
-                    height="26px",
-                    margin_top="16px",  
-                    padding="2px"
+                    src=info["img"]
                 ),
                 rx.vstack(
+                    rx.scroll_area(
+                        rx.vstack(
+                            
+                            rx.text(
+                                info["name"],
+                                font_size="24px",
+                                
+                            ),
+                            rx.text(
+                                info["description"],
+                                font_size="16px",
+                                font_weight="bolder",
+                                line_height="22.4px",
+                                margin_top="8px"
+                            ),
+                            rx.html(
+                                info["dsc"],
+                                
+                            ),
+                            spacing="0",
+                            margin_top="16px",
+                            
+                        )
+                    ),
                     
-                    rx.text(
-                        info["name"],
-                        font_size="24px",
-                          
-                    ),
-                    rx.text(
-                        info["description"],
-                        font_size="16px",
-                        font_weight="bolder",
-                        line_height="22.4px",
-                        margin_top="8px"
-                    ),
-                    rx.text(
-                        "Vasquez-Yanez is a known member of the Mara Salvatrucha (MS-13) gang with ties to El Salvador. He speaks both English and Spanish, although Spanish is his primary language. He was last seen in July of 2016, in Everett, Massachusetts",
-                        font_sise = "14px",
-                        font_weight="400",
-                        margin_top="8px"
-                          
-                    ),
                     
                     width="100%",
                     height="224px",
@@ -115,6 +98,7 @@ def index() -> rx.Component:
             columns="3",
             width="100vw",
             padding_right="78px",
+            
             padding_left="78px"
         )
     )
