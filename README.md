@@ -14,6 +14,12 @@ in terminal, navigate to the `fbi_most_wanted` folder and run
 
 to run just write `python -m reflex run` in the command line
 
+### Demo:
+
+
+https://github.com/user-attachments/assets/a8689cb2-961a-4fa7-ab1e-9fdeb1fadc75
+
+
 
 
 [^1]:version 3.11 or above is fine, older versions may work but I haven't tested them
